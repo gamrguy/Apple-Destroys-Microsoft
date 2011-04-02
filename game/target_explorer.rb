@@ -12,6 +12,7 @@ class Target_Explorer
     @min_speed = 1
     @speed = @min_speed + rand(@max_speed - @min_speed)
     @alive = true  
+    @lives = 1
   end
   
   
@@ -31,13 +32,17 @@ class Target_Explorer
     
     if key_pressed? :r
       @alive = true
+      @lives = 1
     end
   
   end
   
   def check_if_hit
     if (@alive and @player.gun.bullets.any? {|bullet| bullet.hit_target?(self)})
-      @alive = false
+      @lives = @lives - 1
+      if @lives < 0
+          @alive = false
+      end
     end
   end
   

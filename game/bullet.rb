@@ -39,6 +39,11 @@ class Bullet
   def hit_target?(target)
     hit = Gosu::distance(center_x, center_y, target.center_x, target.center_y) < 20
     hit
+    if hit
+        @shot = false
+        @x = -200
+        @y = -200
+    end
   end
   
   def center_x
